@@ -15,10 +15,35 @@ function refreshWeather(response){
     descriptionElement.innerHTML = response.data.condition.description;
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
     windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
+    temperatureElement.innerHTML = response.data.temperature.current;
     temperatureElement.innerHTML = Math.round (temperature);
 }
 
-function searchCity(city){
+
+  
+  function formatDate(date) {
+    let minutes = date.getMinutes();
+    let hours = date.getHours();
+    let day = date.getDay();
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+
+    let day = days [date.getDay()];
+    if(minutes <10){
+        minutes = `0 ${minutes}`
+    }
+  
+  }
+  return `${day} ${hours}:{minutes}`;
+
+  function searchCity(city){
     let apiKey = "2b01c19b38oc3499eaaaf89100t454aa";
     let apiUrl = "https://api.shecodes.io/weather/v1/current?query={query}&key={key}";
     axios.get(apiUrl).then(refreshWeather);
@@ -35,28 +60,6 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit",handleSearchSubmit);
 
 searchCity("Paris");
-  
-  function formatDate(date) {
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
-    let day = date.getDay();
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    
-    let day = days [date.getDay()];
-    if(minutes <10){
-        minutes = `0 ${minutes}`
-    }
-  
-  }
-  return `${day} ${hours}:{minutes}`;
   
   
   
