@@ -40,15 +40,6 @@ searchCity("Paris");
     let minutes = date.getMinutes();
     let hours = date.getHours();
     let day = date.getDay();
-  
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-  
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
-  
     let days = [
       "Sunday",
       "Monday",
@@ -58,10 +49,14 @@ searchCity("Paris");
       "Friday",
       "Saturday"
     ];
+    
+    let day = days [date.getDay()];
+    if(minutes <10){
+        minutes = `0 ${minutes}`
+    }
   
-    let formattedDay = days[day];
-    return `${formattedDay} ${hours}:${minutes}`;
   }
+  return `${day} ${hours}:{minutes}`;
   
   
   
